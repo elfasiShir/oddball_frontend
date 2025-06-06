@@ -90,4 +90,7 @@
     .question {
         font-size: 1.3em;
     }
+    .answer {
+        width: 35%;
+    }
 }

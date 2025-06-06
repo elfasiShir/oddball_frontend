@@ -67,7 +67,7 @@ export function Vote({ setState, playerGuid, gameRound }) {
               <CountdownCircleTimer
                 isPlaying
                 size={80}
-                duration={130}
+                duration={80}
                 colors={["#81ecec", "#fab1a0", "#ff7675"]}
                 colorsTime={[190, 15, 0]}
                 onComplete={() => {

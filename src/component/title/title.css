@@ -1,7 +1,8 @@
 .GameTitle { 
-    font-family: 'Titan One', cursive;
     font-size: 5.2em; 
     user-select: none;
+    color: #ffffff;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {

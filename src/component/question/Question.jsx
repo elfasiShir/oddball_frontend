@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getWebSocket } from "../../utils/webSocket";
 import { apiCall } from "../../utils/api.js";
 import { phases } from "../../const";
+import { showCustomAlert } from "../../utils/customAlert.jsx";
 import "./Question.css";
 
 export function Question({ setState, playerGuid, gameRound }) {
@@ -152,11 +153,14 @@ async function initPlayerReadyness(
 }
 
 function playerReady(isReady, setIsReady, answer) {
-  // verify answer is not empty
-  // if (answer === "") {
-  //   alert("Please enter an answer before proceeding.");
-  //   return;
-  // }
+  // Verify answer is a number string
+  if (answer.trim() !== "" && !isNaN(answer)) {
+    showCustomAlert("Please enter an answer before proceeding.", {
+      icon: "error",
+    });
+    return;
+  }
+
   // send player ready status to server
   const socket = getWebSocket();
   const message = {
