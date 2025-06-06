@@ -1,0 +1,93 @@
+.question-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */ 
+    width: 100%;
+    margin-bottom: 1rem;;
+}
+
+
+.question {
+    display: flex;
+    flex-direction: column; 
+    gap: 2rem;
+    font-size: 2rem;
+    width: 75%;
+    justify-content: center; /* Center vertically */
+    align-items: center;  
+    margin-bottom: 0.8rem;
+}
+
+.answer-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    justify-content: center;  
+    margin-bottom: 1rem;
+}
+
+.answer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; 
+    padding: 0.5rem;
+    font-size: 1rem; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Inherit styles from the base .action-btn class */
+.action-btn.question-btn {
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cheater-message-player-list {
+    list-style-type: none;
+}
+.fox-entity-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; 
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+}
+.cheater-message-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem; 
+}
+.cheater-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; 
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+}
+@media (max-width: 768px) {
+    .question {
+        font-size: 1.3em;
+    }
+}

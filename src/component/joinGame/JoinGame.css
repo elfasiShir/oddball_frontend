@@ -1,0 +1,110 @@
+.join-container {
+display: flex;
+justify-content: center;
+margin-top: 3rem;
+}
+
+.join-card {
+border-radius: 16px;
+padding: 2rem;
+width: 65%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.emojiSelector {
+  cursor: pointer;
+  font-size: 2rem; 
+  line-height: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem; 
+  height: 2.5rem; 
+  overflow: hidden;
+  text-align: center;
+}
+
+
+.name-section {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: end; 
+    justify-content: space-between; 
+    gap: 1rem;
+}
+
+.name-label { 
+    font-size: 1rem;
+}
+
+.name-box-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+}
+
+
+  .name-box {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    align-items: flex-start; /* Align items to the left */
+    gap: 0.5rem; /* Add spacing between label and input */
+  }
+
+.reset-icon {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 100%;
+  }
+  
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.action-btn {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    width: inherit;
+}
+
+.play-btn {
+  position: absolute; /* Position the button inside the container */
+  right: 0.5rem; /* Position it slightly inside the input */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  background-color: transparent; /* Match the input's background */
+  border: none;
+  color: #666; /* Subtle color for the icon */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem; /* Adjust icon size */
+}
+
+.pin-input {
+  width: 100%; /* Make the input take full width */
+  padding-right: 2.5rem; /* Add padding to the right for the button */
+  padding: 0.5rem;
+  font-size: 1rem; 
+  border-radius: 8px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.pin-input-container {
+  position: relative; /* Make the container a positioning context */
+  width: 100%;
+}

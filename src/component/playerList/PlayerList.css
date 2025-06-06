@@ -1,0 +1,72 @@
+.player {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+.playerName:hover {
+    font-size: 2.2rem;
+    transition: font-size 0.1s ease-in-out;
+}
+
+.playerName {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+}
+.roomCode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.5;
+}
+.copyButton {
+    background: none;
+    box-shadow: none;
+}
+.copyButton:hover {
+    transform: scale(1.1);
+    background: none;
+    box-shadow: none;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  @keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes flip {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+    100% { transform: rotateY(360deg); }
+  }
+  
+  .profile-pic.playerProfile.flip {
+    animation: flip 1.4s ease-in-out infinite;
+  }
+  .profile-pic.playerProfile.wiggle {
+    animation: wiggle 0.8s ease-in-out infinite;
+  }
+  
+  .profile-pic.playerProfile.jump {
+    animation: jump 0.5s ease-in-out infinite;
+  }
+  
+  .profile-pic.playerProfile.spin {
+    animation: spin 2.5s linear infinite;
+  }

@@ -1,0 +1,11 @@
+.GameTitle { 
+    font-family: 'Titan One', cursive;
+    font-size: 5.2em; 
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .GameTitle {
+        font-size: 3em; /* Adjust font size for mobile view */
+    }
+}

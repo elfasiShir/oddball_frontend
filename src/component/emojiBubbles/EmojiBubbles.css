@@ -1,0 +1,35 @@
+.emoji-bubble-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevent interaction with the bubbles */
+    overflow: hidden;
+    z-index: 10; /* Ensure it appears above other elements */
+  }
+  
+  .emoji-bubble {
+    position: absolute;
+    bottom: -66px;
+    font-size: 2rem;
+    animation: bubble-up 8s ease-in-out forwards, fade-out 4s ease-in-out forwards;
+  }
+  
+  @keyframes bubble-up {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100vh);
+    }
+  }
+  
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

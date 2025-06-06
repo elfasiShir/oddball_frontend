@@ -1,0 +1,24 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Titan One', cursive;
+}
+.gameBody {
+  background-color: rgba(0, 0, 0, 0.09); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.profile-pic {
+  font-size: 2rem;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* loading animation component: RefreshCcw */
+@keyframes loading {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
