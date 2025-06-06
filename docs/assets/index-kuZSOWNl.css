@@ -1,0 +1,656 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent unnecessary scrolling */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+  width: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #0000001a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  transition: background-color 0.25s;
+  background-color: #00000035; 
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+input {
+  border-radius: 10px;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #0000001a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+}
+input:focus {
+  transition: border-color 0.25s;
+  background-color: #00000035; 
+}
+input:focus-visible {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+input::placeholder {
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+.join-container {
+display: flex;
+justify-content: center;
+margin-top: 3rem;
+}
+
+.join-card {
+border-radius: 16px;
+padding: 2rem;
+width: 65%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.emojiSelector {
+  cursor: pointer;
+  font-size: 2rem; 
+  line-height: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem; 
+  height: 2.5rem; 
+  overflow: hidden;
+  text-align: center;
+}
+
+
+.name-section {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: end; 
+    justify-content: space-between; 
+    gap: 1rem;
+}
+
+.name-label { 
+    font-size: 1rem;
+}
+
+.name-box-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+}
+
+
+  .name-box {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    align-items: flex-start; /* Align items to the left */
+    gap: 0.5rem; /* Add spacing between label and input */
+  }
+
+.reset-icon {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 100%;
+  }
+  
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.action-btn {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    width: inherit;
+}
+
+.play-btn {
+  position: absolute; /* Position the button inside the container */
+  right: 0.5rem; /* Position it slightly inside the input */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  background-color: transparent; /* Match the input's background */
+  border: none;
+  color: #666; /* Subtle color for the icon */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem; /* Adjust icon size */
+}
+
+.pin-input {
+  width: 100%; /* Make the input take full width */
+  padding-right: 2.5rem; /* Add padding to the right for the button */
+  padding: 0.5rem;
+  font-size: 1rem; 
+  border-radius: 8px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.pin-input-container {
+  position: relative; /* Make the container a positioning context */
+  width: 100%;
+}.player {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+.playerName:hover {
+    font-size: 2.2rem;
+    transition: font-size 0.1s ease-in-out;
+}
+
+.playerName {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+}
+.roomCode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.5;
+}
+.copyButton {
+    background: none;
+    box-shadow: none;
+}
+.copyButton:hover {
+    transform: scale(1.1);
+    background: none;
+    box-shadow: none;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  @keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes flip {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+    100% { transform: rotateY(360deg); }
+  }
+  
+  .profile-pic.playerProfile.flip {
+    animation: flip 1.4s ease-in-out infinite;
+  }
+  .profile-pic.playerProfile.wiggle {
+    animation: wiggle 0.8s ease-in-out infinite;
+  }
+  
+  .profile-pic.playerProfile.jump {
+    animation: jump 0.5s ease-in-out infinite;
+  }
+  
+  .profile-pic.playerProfile.spin {
+    animation: spin 2.5s linear infinite;
+  }#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Titan One', cursive;
+}
+.gameBody {
+  background-color: rgba(0, 0, 0, 0.09); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.profile-pic {
+  font-size: 2rem;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* loading animation component: RefreshCcw */
+@keyframes loading {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}.question-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */ 
+    width: 100%;
+    margin-bottom: 1rem;;
+}
+
+
+.question {
+    display: flex;
+    flex-direction: column; 
+    gap: 2rem;
+    font-size: 2rem;
+    width: 75%;
+    justify-content: center; /* Center vertically */
+    align-items: center;  
+    margin-bottom: 0.8rem;
+}
+
+.answer-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    justify-content: center;  
+    margin-bottom: 1rem;
+}
+
+.answer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; 
+    padding: 0.5rem;
+    font-size: 1rem; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Inherit styles from the base .action-btn class */
+.action-btn.question-btn {
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cheater-message-player-list {
+    list-style-type: none;
+}
+.fox-entity-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; 
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+}
+.cheater-message-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem; 
+}
+.cheater-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; 
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+}
+@media (max-width: 768px) {
+    .question {
+        font-size: 1.3em;
+    }
+}
+.GameTitle { 
+    font-family: 'Titan One', cursive;
+    font-size: 5.2em; 
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .GameTitle {
+        font-size: 3em; /* Adjust font size for mobile view */
+    }
+}.emoji-bubble-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevent interaction with the bubbles */
+    overflow: hidden;
+    z-index: 10; /* Ensure it appears above other elements */
+  }
+  
+  .emoji-bubble {
+    position: absolute;
+    bottom: -66px;
+    font-size: 2rem;
+    animation: bubble-up 8s ease-in-out forwards, fade-out 4s ease-in-out forwards;
+  }
+  
+  @keyframes bubble-up {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100vh);
+    }
+  }
+  
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }/* Container for the vote section */
+.vote-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Instruction text for voting */
+.vote-instruction {
+    margin-top: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center; 
+}
+
+/* Question text */
+.vote-question {
+    font-size: 1.6rem;
+    font-style: italic; 
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.06); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; 
+}
+
+/* List of players to vote for */
+.vote-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Individual vote option */
+.vote-option {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 15px; 
+    background-color: rgba(0, 0, 0, 0.09); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; 
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    flex: 1 1 calc(50% - 10px); /* Two columns per row with spacing */
+    max-width: calc(50% - 10px);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.vote-option:hover {  
+    transform: scale(1.03);
+}
+
+/* Aligning player data horizontally */
+.vote-player {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.vote-player-emoji {
+    font-size: 2rem;
+}
+
+.vote-player-name {
+    font-size: 1.2rem;
+    font-weight: bold; 
+}
+
+.vote-player-answer {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    background-color: rgba(0, 0, 0, 0.09); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; 
+}
+ 
+.vote-player-score {
+    font-size: 1rem; 
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* Section showing who voted for a player */
+.was-voted-by {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    max-width: 50%;
+}
+
+.was-voted-by-emoji {
+    font-size: 1.5rem;
+}
+
+.countdown-container {  
+    position: absolute;
+    top: 5px;
+    right: 5px;
+} 
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .vote-container {
+        padding: 10px;
+    }
+
+    .vote-instruction {
+        font-size: 1.5rem;
+    }
+
+    .vote-question {
+        font-size: 1.2rem;
+    }
+
+    .vote-list {
+        gap: 10px;
+    }
+
+    .vote-option {
+        padding: 10px;
+        font-size: 0.9rem; 
+    }
+
+    .vote-player-emoji {
+        font-size: 1.5rem;
+    }
+
+    .vote-player-name {
+        font-size: 1rem;
+    }
+
+    .vote-player-score {
+        font-size: 0.9rem;
+    }
+
+    .was-voted-by {
+        gap: 3px;
+    }
+
+    .was-voted-by-emoji {
+        font-size: 1.2rem;
+    }
+    .countdown-container {
+        position: unset;
+        display: block ruby;
+    }
+}.socre-title { 
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.score-options {
+    padding: 10px;
+    display: flex;   
+    justify-content: space-evenly; 
+}
+.score-list {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap:15px;
+    margin-bottom: 15px;
+}
+.score-player {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    font-size: 1.5rem;
+    gap: 10px; 
+    background-color: rgba(0, 0, 0, 0.06); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;   
+    width: 47%;
+}
+
+.score-player-score {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-left: auto;
+    padding-right: 10px;
+    text-align: right;  
+}
+.score-player-score-winner { 
+    background: linear-gradient(139deg,rgb(240, 218, 255) 0%, rgb(255, 186, 204) 59%, rgb(255, 192, 192) 80%, rgb(255, 225, 183) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+@media (max-width: 768px) {
+    .score-player {
+        width: 75%;
+    }
+}

@@ -7,5 +7,6 @@ export default defineConfig({
   base: "/oddball_frontend/",
   build: {
     outDir: "docs",
+    minify: false,
   },
 });
