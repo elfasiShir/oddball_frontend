@@ -11936,7 +11936,7 @@ function requireClient() {
   return client.exports;
 }
 var clientExports = requireClient();
-const API_BASE_URL = "63.177.226.133:5062";
+const API_BASE_URL = "192.168.1.113:5062";
 async function apiCall(endpoint, method = "GET", body = null) {
   const options = {
     method,
