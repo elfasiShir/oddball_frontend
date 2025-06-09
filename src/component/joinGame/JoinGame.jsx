@@ -3,6 +3,7 @@ import { apiCall } from "../../utils/api.js";
 import { getWebSocket } from "../../utils/webSocket";
 import { phases, adjectives, animalNames, animalEmojis } from "../../const";
 import { showCustomAlert } from "../../utils/customAlert.jsx";
+import toast from "react-hot-toast";
 import { Repeat, Play } from "lucide-react";
 import "./JoinGame.css";
 
@@ -133,6 +134,11 @@ async function InitGame(
       emoji: animalEmoji,
     };
     const player = await apiCall("/addPlayer", "PUT", playerJson);
+    // if api call returns Results.BadRequest it means the game is already in session
+    if (player.status === 400 || player.status === 409) {
+      showCustomAlert("Game already in session", { icon: "error" });
+      return;
+    }
     const playerData = await player.json();
     console.log("Player added:", playerData);
     setPlayerGuid(playerData.guid);

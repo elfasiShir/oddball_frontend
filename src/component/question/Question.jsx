@@ -37,8 +37,8 @@ export function Question({ setState, playerGuid, gameRound }) {
           setPauseReady(true);
         }
         if (message.action === "foxMessage") {
-          // the fox entity has send a message
-          setFoxMessage(message.data);
+          // the fox entity has sent a message
+          setFoxMessage(message.data.FoxMessage);
         }
         if (message.action === "cheaterResults") {
           // Cheating results from the server
@@ -50,8 +50,23 @@ export function Question({ setState, playerGuid, gameRound }) {
           // some player has finished using the fox entity
           setPauseReady(false);
         }
+        if (message.action === "playerLeft") {
+          initPlayerReadyness(
+            playerGuid,
+            setCurrentReadyPlayers,
+            setNumberOfPlayers
+          );
+        }
         if (message.action === "oddBallPlayerLeft") {
-          alert("The odd ball player has left the game. Ending round");
+          showCustomAlert(
+            "The odd ball player has left the game, moving to ScoreBoard."
+          );
+          setIsReady(false);
+          setAnswer(false);
+          setFoxMessage(null);
+          setIsCheater(false);
+          setCheaterPlayers([]);
+          setIsFoxEntityAvailable(false);
           setState(phases.ScoreBoard);
         }
         if (message.action === "allPlayersReady") {
@@ -79,13 +94,8 @@ export function Question({ setState, playerGuid, gameRound }) {
       {foxMessage && (
         <div className="gameBody fox-entity-body">
           <div className="fox-message">
-            <div className="fox-emoji"></div>
-            <div className="fox-text">
-              🦊{" "}
-              {typeof foxMessage === "object" && foxMessage.FoxMessage
-                ? foxMessage.FoxMessage
-                : ""}
-            </div>
+            <div className="fox-emoji">🦊 Hey there~</div>
+            <div className="fox-text">{foxMessage}</div>
           </div>
         </div>
       )}
@@ -154,8 +164,15 @@ async function initPlayerReadyness(
 
 function playerReady(isReady, setIsReady, answer) {
   // Verify answer is a number string
-  if (answer.trim() !== "" && !isNaN(answer)) {
+
+  if (answer === "") {
     showCustomAlert("Please enter an answer before proceeding.", {
+      icon: "error",
+    });
+    return;
+  }
+  if (isNumericString(answer) === false) {
+    showCustomAlert("Answer needs to be a number.", {
       icon: "error",
     });
     return;
@@ -184,4 +201,8 @@ async function GetPlayerQuestion(playerGuid, setQuestion) {
   const question = await apiCall(`/getPlayerQuestion/${playerGuid}`, "GET");
   const questionData = await question.json();
   setQuestion(questionData);
+}
+
+function isNumericString(str) {
+  return !isNaN(str.trim()) && str.trim() !== "";
 }

@@ -4,6 +4,7 @@ import { phases } from "../../const";
 import { apiCall } from "../../utils/api";
 import { getWebSocket } from "../../utils/webSocket";
 import { Copy, RefreshCcw } from "lucide-react";
+import toast from "react-hot-toast";
 import "./PlayerList.css";
 import "../../App.css";
 
@@ -29,19 +30,23 @@ export function PlayerList({ setState, pin, gameRound }) {
         if (message.action === "playerJoined") {
           console.log("Player joined:", message);
           fetchPlayerList(pin, setPlayers);
-        } else if (message.action === "playerLeft") {
+        }
+        if (message.action === "playerLeft") {
           console.log("Player left:", message);
           fetchPlayerList(pin, setPlayers);
-        } else if (
+        }
+        if (
           message.action === "lockSocket" ||
           message.action === "hostSocketLoading"
         ) {
           console.log("Game start loading:", message);
           setShowLoading(true);
-        } else if (message.action === "unlockSocket") {
+        }
+        if (message.action === "unlockSocket") {
           // websocket is unlocked
           setShowLoading(false);
-        } else if (message.action === "gameStarted") {
+        }
+        if (message.action === "gameStarted") {
           console.log("Game started:", message);
           setShowLoading(false);
           setState(phases.Question);
@@ -63,7 +68,24 @@ export function PlayerList({ setState, pin, gameRound }) {
         <h2>Room code: {pin}</h2>
         <button
           className="copyButton"
-          onClick={() => navigator.clipboard.writeText(pin)}
+          onClick={() => {
+            if (
+              navigator.clipboard &&
+              typeof navigator.clipboard.writeText === "function"
+            ) {
+              navigator.clipboard
+                .writeText(pin)
+                .then(() => {
+                  toast.success(`Room code ${pin} copied to clipboard`);
+                })
+                .catch((err) => {
+                  console.error("Failed to copy: ", err);
+                  toast.error("Failed to copy room code.");
+                });
+            } else {
+              toast.error("Clipboard not supported in this browser.");
+            }
+          }}
         >
           <Copy />
         </button>

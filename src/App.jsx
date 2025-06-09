@@ -11,6 +11,9 @@ import {
 import { getWebSocket } from "./utils/webSocket";
 import "./App.css";
 import { phases, gradients } from "./const";
+import { showCustomAlert } from "./utils/customAlert";
+import { Check, X } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   // State means the current phase of the game
@@ -101,6 +104,37 @@ function App() {
 
         <EmojiBubbles />
       </div>
+
+      {/* Custom Toast */}
+
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          // Default styles for all toasts
+          style: {
+            background: "#333",
+            color: "#fff",
+            borderRadius: "8px",
+            fontSize: "20px",
+          },
+          success: {
+            icon: <Check size={40} color="white" />,
+            style: {
+              background: "#55efc4",
+            },
+          },
+          error: {
+            icon: <X size={40} color="white" />,
+            style: {
+              background: "#ff7675",
+            },
+          },
+          foxEntity: {
+            icon: "🦊",
+            
+          },
+        }}
+      />
     </>
   );
 }

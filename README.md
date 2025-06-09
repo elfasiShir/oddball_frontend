@@ -2,16 +2,6 @@ Front end:
 npm run dev # For Vite
 npm start # For Create React App
 
-Back end:
-dotnet dev-certs https --trust
-
-To run back end; run program.cs file
-
-Nuget package:
-dotnet add package Microsoft.EntityFrameworkCore.InMemory
-dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
-dotnet add package NSwag.AspNetCore #swagger ui
-
 Color pallete:
 https://flatuicolors.com/palette/us
 
@@ -44,44 +34,47 @@ icon: 'success',
 showConfirmButton: true,
 });
 
-Websocket:
+# Toast message
 
-listen to websocket:
-wscat -c ws://localhost:5062/ws
+https://react-hot-toast.com/docs
 
-AI create questions prompt:
-game rules follows as such:
-x players play the game x - 1 players receive question A
-but 1 player will receive question B
-the difference between question A and B is as follows
-both question expect numerical answer only
-example:
-A: How many months passed since you last traveled abroad?
-B: How many pets did you have?
+> npm install react-hot-toast
 
-the goal of the game is to identify the player who got the question B after all answers revealed (and not the questions given)
+#Basic Usage
 
-- Questions CANT ask about common knowledge
-  example: you CANT ask how many days are in the week because
-  the answer will always be 7, then any player who didnt type 7 will easily be identified as the one who got question B
+// In App.jsx or index.jsx
+import { Toaster } from 'react-hot-toast';
 
-- Questions should have around the same range of plausible answers. meaning as example you cant ask a question that can have 0-9000000 as numeric answer and another question that can only have 0-90 numeric answers
-  like:
-  A: at what age you had your favorite birthday.
-  B: how many milliseconds passed since your birthday
-
-generate QuestionA and questionB as json
-
-QuestionA will be dubbed "question"
-QuestionB will be dubbed "oddBallQuestion" as it will be the question given to 1 party member
-
-like so:
-[
-{
-"question": "How many months passed since you last traveled abroad?",
-"oddBallQuestion": "How many pets did you have?"
+function App() {
+return (
+<>
+<Toaster position="top-right" />
+{/* Your app code */}
+</>
+);
 }
-]
+
+# Use the toast anywhere:
+
+import toast from 'react-hot-toast';
+function ExampleButton() {
+return (
+<button onClick={() => toast.success('Saved successfully!')}>
+Save
+</button>
+);
+}
+
+# Customization Example
+
+toast('This is a custom toast!', {
+icon: '👏',
+style: {
+borderRadius: '10px',
+background: '#333',
+color: '#fff',
+},
+});
 
 # React + Vite
 

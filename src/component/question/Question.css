@@ -57,7 +57,9 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+.question-cheat-button{
+    margin-bottom: 10px; 
+}
 .cheater-message-player-list {
     list-style-type: none;
 }
