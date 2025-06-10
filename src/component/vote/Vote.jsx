@@ -2,7 +2,11 @@ import { useState, useEffect, use } from "react";
 import { getWebSocket } from "../../utils/webSocket";
 import { apiCall } from "../../utils/api.js";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { showCustomAlert } from "../../utils/customAlert.jsx";
+import {
+  showCustomAlert,
+  celebrateCustomAlert,
+  jailBreakCustomAlert,
+} from "../../utils/customAlert.jsx";
 import toast from "react-hot-toast";
 import { phases } from "../../const";
 import "./Vote.css";
@@ -52,16 +56,18 @@ export function Vote({ setState, playerGuid, gameRound }) {
           CountDownHandleComplete();
         }
         if (message.action === "oddBallPlayerWasCaught") {
-          showCustomAlert(
-            "odd ball player was cought! moving to scoring phase"
+          celebrateCustomAlert(
+            "Odd-ball was cought!",
+            "+1 score if you voted for them"
           );
           setShowClock(true);
           setEnableVoting(true);
           setState(phases.ScoreBoard);
         }
         if (message.action === "oddBallPlayerEscaped") {
-          showCustomAlert(
-            "odd ball player has escaped! moving to scoring phase"
+          jailBreakCustomAlert(
+            "odd-ball has escaped!",
+            "+2 score for them, +1 for those who voted for them"
           );
           setShowClock(true);
           setEnableVoting(true);

@@ -206,7 +206,10 @@ align-items: center;
   justify-content: center;
   font-size: 1.2rem; /* Adjust icon size */
 }
-
+.play-btn.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .pin-input {
   width: 100%; /* Make the input take full width */
   padding-right: 2.5rem; /* Add padding to the right for the button */
@@ -330,7 +333,10 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 /* loading animation component: RefreshCcw */
 @keyframes loading {
   0% { transform: rotate(0deg); }

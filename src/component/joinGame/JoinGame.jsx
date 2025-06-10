@@ -18,6 +18,7 @@ export function JoinGame({
   const [showPinInput, setShowPinInput] = useState(false);
   const [PinInput, setPinInput] = useState("");
   const [animalEmoji, setAnimalEmoji] = useState(pickRandomEmoji());
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setPlayerName(generateAnimalName(adjectives, animalNames));
@@ -37,9 +38,9 @@ export function JoinGame({
                 className="name-input"
               />
               <div
-                onClick={() =>
-                  setPlayerName(generateAnimalName(adjectives, animalNames))
-                }
+                onClick={() => {
+                  setPlayerName(generateAnimalName(adjectives, animalNames));
+                }}
                 className="reset-icon"
               >
                 <Repeat size={20} color="white" />
@@ -57,21 +58,30 @@ export function JoinGame({
         </div>
 
         <div className="actions">
-          <button onClick={() => setShowPinInput(true)} className="action-btn">
+          <button
+            onClick={() => {
+              setShowPinInput(true);
+            }}
+            className="action-btn"
+            disabled={isLoading} // Disable button while loading
+          >
             Join existing game
           </button>
           <button
-            onClick={() =>
-              InitGame(
+            onClick={async () => {
+              setIsLoading(true); // Set loading state
+              await InitGame(
                 playerName,
                 setState,
                 setPin,
                 animalEmoji,
                 socketGuid,
                 setPlayerGuid
-              )
-            }
+              );
+              setIsLoading(false); // Reset loading state
+            }}
             className="action-btn"
+            disabled={isLoading} // Disable button while loading
           >
             Host a game
           </button>
@@ -85,17 +95,29 @@ export function JoinGame({
               className="pin-input"
             />
             <div
-              className="play-btn"
-              onClick={() => {
-                JoinExistingGame(
-                  playerName,
-                  setState,
-                  PinInput,
-                  animalEmoji,
-                  setPin,
-                  socketGuid,
-                  setPlayerGuid
-                );
+              className={`play-btn ${isLoading ? "disabled" : ""}`} // Add dynamic class for disabled state
+              onClick={async () => {
+                if (!isLoading) {
+                  // Prevent click if loading
+                  setIsLoading(true); // Set loading state
+                  if (PinInput.trim() === "") {
+                    showCustomAlert("Please enter a valid PIN", {
+                      icon: "error",
+                    });
+                    setIsLoading(false); // Reset loading state
+                    return;
+                  }
+                  await JoinExistingGame(
+                    playerName,
+                    setState,
+                    PinInput,
+                    animalEmoji,
+                    setPin,
+                    socketGuid,
+                    setPlayerGuid
+                  );
+                  setIsLoading(false); // Reset loading state
+                }
               }}
             >
               <Play size={20} color="white" />
@@ -208,7 +230,11 @@ async function JoinExistingGame(
     );
     setState(phases.PlayerList);
   } catch (error) {
-    console.error(error);
+    console.error(error); // Show custom alert for API call failure
+
+    showCustomAlert("Failed to join the game. Please try again.", {
+      icon: "error",
+    });
   }
 }
 

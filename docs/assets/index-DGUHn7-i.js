@@ -15297,6 +15297,134 @@ function showCustomAlert(message, options = {}) {
     ...options
   });
 }
+function celebrateCustomAlert(title, subtitle, options = {}) {
+  return MySwal.fire({
+    title: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        style: {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          lineHeight: 1.3
+        },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "h2",
+            {
+              style: {
+                color: "#9497ff",
+                fontWeight: "bold",
+                fontSize: "1.6rem",
+                margin: 0
+              },
+              children: title
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              style: {
+                fontSize: "1.1rem",
+                marginTop: "0.4rem",
+                marginBottom: "0.4rem"
+              },
+              children: subtitle
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: "1.4rem" }, children: "🎉🚨👮‍♀️🚨🎉" })
+        ]
+      }
+    ),
+    html: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "img",
+      {
+        src: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2NmdTdtOWk2d2phZm9va20zOXJrNmFrODhlN3Q3MGFscXRjcXFodyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ornjSBhRWTaL3l2X6/giphy.gif",
+        alt: "celebration",
+        style: { maxWidth: "100%", width: "300px", height: "auto" }
+      }
+    ),
+    background: "#fffbe6",
+    confirmButtonText: "Ok!",
+    confirmButtonColor: "#9497ff",
+    showClass: {
+      popup: "animate__animated animate__bounceIn"
+    },
+    hideClass: {
+      popup: "animate__animated animate__fadeOutDown"
+    },
+    backdrop: `rgba(0,0,123,0.4)`,
+    customClass: {
+      popup: "custom-swal-popup",
+      title: "custom-swal-title"
+    },
+    ...options
+  });
+}
+function jailBreakCustomAlert(title, subtitle, options = {}) {
+  return MySwal.fire({
+    title: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        style: {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          lineHeight: 1.3
+        },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "h2",
+            {
+              style: {
+                color: "#9497ff",
+                fontWeight: "bold",
+                fontSize: "1.6rem",
+                margin: 0
+              },
+              children: title
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              style: {
+                fontSize: "1.1rem",
+                marginTop: "0.4rem",
+                marginBottom: "0.4rem"
+              },
+              children: subtitle
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: "1.4rem" }, children: "🎉⛓️💸🐷💸⛓️🎉" })
+        ]
+      }
+    ),
+    html: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "img",
+      {
+        src: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdndpNTJmeDBpNnhwZHczZHFoczM4ZGVsaHNkaXFwbGRyNDkzN29oOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/M7oKkaur56EFO/giphy.gif",
+        alt: "celebration",
+        style: { maxWidth: "100%", width: "300px", height: "auto" }
+      }
+    ),
+    background: "#fffbe6",
+    confirmButtonText: "Ok!",
+    confirmButtonColor: "#9497ff",
+    showClass: {
+      popup: "animate__animated animate__bounceIn"
+    },
+    hideClass: {
+      popup: "animate__animated animate__fadeOutDown"
+    },
+    backdrop: `rgba(0,0,123,0.4)`,
+    customClass: {
+      popup: "custom-swal-popup",
+      title: "custom-swal-title"
+    },
+    ...options
+  });
+}
 let e = { data: "" }, t = (t2) => "object" == typeof window ? ((t2 ? t2.querySelector("#_goober") : window._goober) || Object.assign((t2 || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : t2 || e, l = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g, a = /\/\*[^]*?\*\/|  +/g, n = /\n+/g, o = (e2, t2) => {
   let r = "", l2 = "", a2 = "";
   for (let n2 in e2) {
@@ -15882,6 +16010,7 @@ function JoinGame({
   const [showPinInput, setShowPinInput] = reactExports.useState(false);
   const [PinInput, setPinInput] = reactExports.useState("");
   const [animalEmoji, setAnimalEmoji] = reactExports.useState(pickRandomEmoji());
+  const [isLoading2, setIsLoading] = reactExports.useState(false);
   reactExports.useEffect(() => {
     setPlayerName(generateAnimalName(adjectives, animalNames));
   }, []);
@@ -15901,7 +16030,9 @@ function JoinGame({
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            onClick: () => setPlayerName(generateAnimalName(adjectives, animalNames)),
+            onClick: () => {
+              setPlayerName(generateAnimalName(adjectives, animalNames));
+            },
             className: "reset-icon",
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(Repeat, { size: 20, color: "white" })
           }
@@ -15919,19 +16050,34 @@ function JoinGame({
       )
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "actions", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setShowPinInput(true), className: "action-btn", children: "Join existing game" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
-          onClick: () => InitGame(
-            playerName,
-            setState,
-            setPin,
-            animalEmoji,
-            socketGuid,
-            setPlayerGuid
-          ),
+          onClick: () => {
+            setShowPinInput(true);
+          },
           className: "action-btn",
+          disabled: isLoading2,
+          children: "Join existing game"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          onClick: async () => {
+            setIsLoading(true);
+            await InitGame(
+              playerName,
+              setState,
+              setPin,
+              animalEmoji,
+              socketGuid,
+              setPlayerGuid
+            );
+            setIsLoading(false);
+          },
+          className: "action-btn",
+          disabled: isLoading2,
           children: "Host a game"
         }
       )
@@ -15948,17 +16094,28 @@ function JoinGame({
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: "play-btn",
-          onClick: () => {
-            JoinExistingGame(
-              playerName,
-              setState,
-              PinInput,
-              animalEmoji,
-              setPin,
-              socketGuid,
-              setPlayerGuid
-            );
+          className: `play-btn ${isLoading2 ? "disabled" : ""}`,
+          onClick: async () => {
+            if (!isLoading2) {
+              setIsLoading(true);
+              if (PinInput.trim() === "") {
+                showCustomAlert("Please enter a valid PIN", {
+                  icon: "error"
+                });
+                setIsLoading(false);
+                return;
+              }
+              await JoinExistingGame(
+                playerName,
+                setState,
+                PinInput,
+                animalEmoji,
+                setPin,
+                socketGuid,
+                setPlayerGuid
+              );
+              setIsLoading(false);
+            }
           },
           children: /* @__PURE__ */ jsxRuntimeExports.jsx(Play, { size: 20, color: "white" })
         }
@@ -16040,6 +16197,9 @@ async function JoinExistingGame(playerName, setState, PinInput, animalEmoji, set
     setState(phases.PlayerList);
   } catch (error2) {
     console.error(error2);
+    showCustomAlert("Failed to join the game. Please try again.", {
+      icon: "error"
+    });
   }
 }
 function generateAnimalName(adjectives2, animalNames2) {
@@ -16463,16 +16623,18 @@ function Vote({ setState, playerGuid, gameRound }) {
           CountDownHandleComplete();
         }
         if (message.action === "oddBallPlayerWasCaught") {
-          showCustomAlert(
-            "odd ball player was cought! moving to scoring phase"
+          celebrateCustomAlert(
+            "Odd-ball was cought!",
+            "+1 score if you voted for them"
           );
           setShowClock(true);
           setEnableVoting(true);
           setState(phases.ScoreBoard);
         }
         if (message.action === "oddBallPlayerEscaped") {
-          showCustomAlert(
-            "odd ball player has escaped! moving to scoring phase"
+          jailBreakCustomAlert(
+            "odd-ball has escaped!",
+            "+2 score for them, +1 for those who voted for them"
           );
           setShowClock(true);
           setEnableVoting(true);
