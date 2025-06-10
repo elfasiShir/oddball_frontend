@@ -1,11 +1,11 @@
-import { API_BASE_URL } from "./api";
+import { API_BASE_URL, WS_PROTOCOL } from "./api";
 
 let socket = null;
 
 export const getWebSocket = () => {
   if (!socket) {
     // Initialize the WebSocket connection
-    socket = new WebSocket(`ws://${API_BASE_URL}/ws`);
+    socket = new WebSocket(`${WS_PROTOCOL}://${API_BASE_URL}/ws`);
 
     // WebSocket event listeners
     socket.onopen = () => {

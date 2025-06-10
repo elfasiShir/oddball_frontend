@@ -1,5 +1,8 @@
 //export const API_BASE_URL = "63.177.226.133:5062";
-export const API_BASE_URL = "192.168.1.113:5062";
+//export const API_BASE_URL = "192.168.1.113:5062";
+export const API_BASE_URL = "oddball.roytmax.com";
+export const PROTOCOL = "https";
+export const WS_PROTOCOL = "wss";
 /**
  * A utility function to make API calls.
  * @param {string} endpoint - The API endpoint (e.g., "/createGame").
@@ -19,7 +22,10 @@ export async function apiCall(endpoint, method = "GET", body = null) {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(`http://${API_BASE_URL}${endpoint}`, options);
+  const response = await fetch(
+    `${PROTOCOL}://${API_BASE_URL}${endpoint}`,
+    options
+  );
 
   if (!response.ok) {
     throw new Error(`API call failed: ${response.statusText}`);

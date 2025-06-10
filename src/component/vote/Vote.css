@@ -57,6 +57,11 @@
     transform: scale(1.03);
 }
 
+.vote-option .vote-option-disabled {
+    cursor: none;
+    transition: none;
+
+}
 /* Aligning player data horizontally */
 .vote-player {
     display: flex;

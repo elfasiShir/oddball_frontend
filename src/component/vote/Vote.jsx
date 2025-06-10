@@ -3,6 +3,7 @@ import { getWebSocket } from "../../utils/webSocket";
 import { apiCall } from "../../utils/api.js";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { showCustomAlert } from "../../utils/customAlert.jsx";
+import toast from "react-hot-toast";
 import { phases } from "../../const";
 import "./Vote.css";
 
@@ -10,7 +11,9 @@ export function Vote({ setState, playerGuid, gameRound }) {
   const [mostAskedQuestion, setMostAskedQuestion] = useState("");
   const [players, setPlayers] = useState([]);
   const [showClock, setShowClock] = useState(true);
+  const [disableClock, setDisableClock] = useState(false);
   const [enableVoting, setEnableVoting] = useState(true);
+  const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
     FetchMostAskedQuestion(setMostAskedQuestion, playerGuid);
@@ -31,6 +34,22 @@ export function Vote({ setState, playerGuid, gameRound }) {
         if (message.action === "calculatingVotes") {
           setShowClock(false);
           setEnableVoting(false);
+        }
+        if (message.action === "disableVotingMessage") {
+          setEnableVoting(false);
+          toast.success("Vote locked!");
+        }
+        if (message.action === "enableVotingMessage") {
+          setEnableVoting(true);
+          setDisableClock(false);
+          setShowClock(true);
+          toast.error("Something went wrong, voting is enabled again");
+        }
+        if (message.action === "allVotesLocked") {
+          setShowClock(false);
+          setEnableVoting(false);
+          setDisableClock(true);
+          CountDownHandleComplete();
         }
         if (message.action === "oddBallPlayerWasCaught") {
           showCustomAlert(
@@ -65,13 +84,15 @@ export function Vote({ setState, playerGuid, gameRound }) {
           <div className="countdown-container">
             {showClock ? (
               <CountdownCircleTimer
-                isPlaying
+                isPlaying={!disableClock}
                 size={80}
-                duration={80}
+                duration={280}
                 colors={["#81ecec", "#fab1a0", "#ff7675"]}
                 colorsTime={[190, 15, 0]}
                 onComplete={() => {
-                  CountDownHandleComplete();
+                  if (disableClock) {
+                    CountDownHandleComplete();
+                  }
                   return { shouldRepeat: false };
                 }}
               >
@@ -89,10 +110,12 @@ export function Vote({ setState, playerGuid, gameRound }) {
           {players.map((player) => (
             <div
               key={player.guid}
-              className="vote-option"
+              className={`vote-option${
+                !enableVoting ? " vote-option-disabled" : ""
+              }`}
               onClick={() => {
                 if (enableVoting) {
-                  PlayerVoted(player.guid);
+                  PlayerVoted(player.guid, setHasVoted);
                 }
               }}
             >
@@ -116,12 +139,17 @@ export function Vote({ setState, playerGuid, gameRound }) {
             </div>
           ))}
         </div>
+        {hasVoted && (
+          <button className="lock-vote" onClick={() => lockVote()}>
+            Lock vote
+          </button>
+        )}
       </div>
     </>
   );
 }
 
-function PlayerVoted(votedForGuid) {
+function PlayerVoted(votedForGuid, setHasVoted) {
   // Send the vote to the websocket server
   const socket = getWebSocket();
   const message = {
@@ -129,6 +157,7 @@ function PlayerVoted(votedForGuid) {
     votedForGuid: votedForGuid,
   };
   socket.send(JSON.stringify(message));
+  setHasVoted(true);
 }
 function CountDownHandleComplete() {
   const socket = getWebSocket();
@@ -164,4 +193,12 @@ async function FetchVotingPlayers(setPlayers, playerGuid) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function lockVote() {
+  const socket = getWebSocket();
+  const message = {
+    type: "playerLockVote",
+  };
+  socket.send(JSON.stringify(message));
 }
