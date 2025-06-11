@@ -13,6 +13,7 @@ export const WS_PROTOCOL = "ws";
 export const API_BASE_URL = "oddball.roytmax.com";
 export const PROTOCOL = "https";
 export const WS_PROTOCOL = "wss";
+
 /**
  * A utility function to make API calls.
  * @param {string} endpoint - The API endpoint (e.g., "/createGame").

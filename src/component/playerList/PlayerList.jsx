@@ -4,6 +4,7 @@ import { phases } from "../../const";
 import { apiCall } from "../../utils/api";
 import { getWebSocket } from "../../utils/webSocket";
 import { Copy, RefreshCcw } from "lucide-react";
+import { showCustomAlert } from "../../utils/customAlert";
 import toast from "react-hot-toast";
 import "./PlayerList.css";
 import "../../App.css";
@@ -93,8 +94,9 @@ export function PlayerList({ setState, pin, gameRound }) {
       <br />
       {showLoading ? (
         <div className="loading">
-          <h2>Game is starting... </h2>
-          <RefreshCcw className="loadingIcon" />
+          <button className="loading-button" disabled="true">
+            Loading <RefreshCcw className="loadingIcon loadingAnimation" />
+          </button>
         </div>
       ) : (
         <button onClick={() => startGame(players)}>Everyone is here!</button>
@@ -118,10 +120,9 @@ export function PlayerList({ setState, pin, gameRound }) {
 
 function startGame(players) {
   // Check if there are enough players to start the game
-  if (players.length < 1) {
-    // TODO: change to 3
-    // TODO: pretty alert
-    alert("Not enough players to start the game.");
+
+  if (players.length < 3) {
+    showCustomAlert("Minimum 3 players to start the game.", { icon: "error" });
     return;
   }
   // Send a message to websocket to handle game start
