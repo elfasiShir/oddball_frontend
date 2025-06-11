@@ -565,7 +565,13 @@ button:disabled {
     font-size: 1.2rem;
     font-weight: bold; 
 }
-
+.vote-player-cheater {
+    background: linear-gradient(139deg,rgb(239, 228, 247) 0%, rgb(253, 198, 213) 59%, rgb(252, 197, 197) 80%, rgb(254, 229, 194) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+    font-size: 1.3rem;
+}
 .vote-player-answer {
     font-size: 1.5rem; 
     font-weight: bold; 

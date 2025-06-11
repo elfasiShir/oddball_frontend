@@ -16612,6 +16612,7 @@ function Vote({ setState, playerGuid, gameRound }) {
         if (message.action === "calculatingVotes") {
           setShowClock(false);
           setEnableVoting(false);
+          setDisableClock(true);
         }
         if (message.action === "disableVotingMessage") {
           setEnableVoting(false);
@@ -16636,6 +16637,7 @@ function Vote({ setState, playerGuid, gameRound }) {
           );
           setShowClock(true);
           setEnableVoting(true);
+          setDisableClock(false);
           setState(phases.ScoreBoard);
         }
         if (message.action === "oddBallPlayerEscaped") {
@@ -16660,13 +16662,13 @@ function Vote({ setState, playerGuid, gameRound }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "countdown-container", children: showClock ? /* @__PURE__ */ jsxRuntimeExports.jsx(
         D,
         {
-          isPlaying: !disableClock,
+          isPlaying: "false",
           size: 80,
-          duration: 120,
+          duration: 130,
           colors: ["#81ecec", "#fab1a0", "#ff7675"],
-          colorsTime: [190, 15, 0],
+          colorsTime: [130, 15, 0],
           onComplete: () => {
-            if (disableClock) {
+            if (!disableClock) {
               CountDownHandleComplete();
             }
             return { shouldRepeat: false };
@@ -16694,7 +16696,12 @@ function Vote({ setState, playerGuid, gameRound }) {
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "vote-player", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "vote-player-emoji", children: player.emoji }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "vote-player-name", children: player.name })
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "vote-player-name", children: [
+              player.isCheater && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "vote-player-cheater", children: "Cheater" }),
+              " ",
+              player.isCheater,
+              player.name
+            ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "vote-player-answer", children: [
             'answered: "',
