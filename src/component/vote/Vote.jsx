@@ -38,6 +38,7 @@ export function Vote({ setState, playerGuid, gameRound }) {
         if (message.action === "calculatingVotes") {
           setShowClock(false);
           setEnableVoting(false);
+          setDisableClock(true);
         }
         if (message.action === "disableVotingMessage") {
           setEnableVoting(false);
@@ -62,6 +63,7 @@ export function Vote({ setState, playerGuid, gameRound }) {
           );
           setShowClock(true);
           setEnableVoting(true);
+          setDisableClock(false);
           setState(phases.ScoreBoard);
         }
         if (message.action === "oddBallPlayerEscaped") {
@@ -90,13 +92,13 @@ export function Vote({ setState, playerGuid, gameRound }) {
           <div className="countdown-container">
             {showClock ? (
               <CountdownCircleTimer
-                isPlaying={!disableClock}
+                isPlaying="false"
                 size={80}
-                duration={120}
+                duration={130}
                 colors={["#81ecec", "#fab1a0", "#ff7675"]}
-                colorsTime={[190, 15, 0]}
+                colorsTime={[130, 15, 0]}
                 onComplete={() => {
-                  if (disableClock) {
+                  if (!disableClock) {
                     CountDownHandleComplete();
                   }
                   return { shouldRepeat: false };
@@ -127,7 +129,13 @@ export function Vote({ setState, playerGuid, gameRound }) {
             >
               <div className="vote-player">
                 <div className="vote-player-emoji">{player.emoji}</div>
-                <div className="vote-player-name">{player.name}</div>
+                <div className="vote-player-name">
+                  {player.isCheater && (
+                    <span className="vote-player-cheater">Cheater</span>
+                  )}{" "}
+                  {player.isCheater}
+                  {player.name}
+                </div>
               </div>
               <div className="vote-player-answer">
                 answered: "{player.answer}"
