@@ -11959,12 +11959,18 @@ async function apiCall(endpoint, method = "GET", body = null) {
   return response;
 }
 let socket = null;
+let pingInterval = null;
 const getWebSocket = () => {
   if (!socket) {
     socket = new WebSocket(`${WS_PROTOCOL}://${API_BASE_URL}/ws`);
     socket.onopen = () => {
       console.log("WebSocket connection established");
       socket.send(JSON.stringify({ message: "Hello, server!" }));
+      pingInterval = setInterval(() => {
+        if (socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify({ type: "ping" }));
+        }
+      }, 3e4);
     };
     socket.onmessage = (event) => {
       console.log("Message from server:", event.data);
@@ -11972,6 +11978,7 @@ const getWebSocket = () => {
     socket.onclose = () => {
       console.log("WebSocket connection closed.");
       socket = null;
+      clearInterval(pingInterval);
     };
     socket.onerror = (error2) => {
       console.error("WebSocket error:", error2);
