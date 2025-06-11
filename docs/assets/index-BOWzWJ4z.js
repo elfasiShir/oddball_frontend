@@ -16021,7 +16021,7 @@ function JoinGame({
   reactExports.useEffect(() => {
     setPlayerName(generateAnimalName(adjectives, animalNames));
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "join-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join-card", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "join-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join-card", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "name-box-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-section", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-box", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "name-label", children: "And you are..." }),
@@ -16128,7 +16128,7 @@ function JoinGame({
         }
       )
     ] })
-  ] }) });
+  ] }) }) });
 }
 async function InitGame(playerName, setState, setPin, animalEmoji, socketGuid, setPlayerGuid) {
   const newGame = {
@@ -16281,10 +16281,10 @@ function PlayerList({ setState, pin, gameRound }) {
       )
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-    showLoading2 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "loading", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Game is starting... " }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(RefreshCcw, { className: "loadingIcon" })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => startGame(players), children: "Everyone is here!" }),
+    showLoading2 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "loading", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "loading-button", disabled: "true", children: [
+      "Loading ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(RefreshCcw, { className: "loadingIcon loadingAnimation" })
+    ] }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => startGame(players), children: "Everyone is here!" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "playerList", children: players.map((player) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "player", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
@@ -16301,8 +16301,8 @@ function PlayerList({ setState, pin, gameRound }) {
   ] });
 }
 function startGame(players) {
-  if (players.length < 1) {
-    alert("Not enough players to start the game.");
+  if (players.length < 3) {
+    showCustomAlert("Minimum 3 players to start the game.", { icon: "error" });
     return;
   }
   const socket2 = getWebSocket();

@@ -256,44 +256,49 @@ align-items: center;
     background: none;
     box-shadow: none;
 }
+.loading { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-@keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
-    75% { transform: rotate(-5deg); }
-    100% { transform: rotate(0deg); }
-  }
-  
-  @keyframes jump {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  @keyframes flip {
-    0% { transform: rotateY(0deg); }
-    50% { transform: rotateY(180deg); }
-    100% { transform: rotateY(360deg); }
-  }
-  
-  .profile-pic.playerProfile.flip {
-    animation: flip 1.4s ease-in-out infinite;
-  }
-  .profile-pic.playerProfile.wiggle {
-    animation: wiggle 0.8s ease-in-out infinite;
-  }
-  
-  .profile-pic.playerProfile.jump {
-    animation: jump 0.5s ease-in-out infinite;
-  }
-  
-  .profile-pic.playerProfile.spin {
-    animation: spin 2.5s linear infinite;
-  }#root {
+.loading-button {
+    gap: 10px;
+    font-size:1.5rem;
+    width: 22%;
+    padding: 5px;
+    display: flex;
+    align-items:center;
+    text-align: center;
+}
+
+.loadingIcon {
+    font-size: 1rem;
+    color: #ffffff;
+    display: inline-block;
+    animation: loadingAnimation 1s linear infinite;
+}
+
+.profile-pic.playerProfile.flip {
+  display: inline-block;
+  animation: flip 1s ease-in-out infinite;
+  transform-style: preserve-3d; 
+}
+.profile-pic.playerProfile.wiggle {
+  display: inline-block;
+  animation: wiggle 1s ease-in-out infinite;
+  /* transform-origin: center bottom; /* makes the wiggle feel like a head turning */
+}
+.profile-pic.playerProfile.jump {
+  animation: jump 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.1s); /* use --i for index */
+}
+
+.profile-pic.playerProfile.spin {
+  display: inline-block;
+  animation: spin 1.5s linear infinite;
+  transform-origin: center center;
+}#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -337,10 +342,111 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+/* Animations */
 /* loading animation component: RefreshCcw */
-@keyframes loading {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes loadingAnimation {
+  0% { transform: rotate(360deg);  }
+  100% {transform: rotate(0deg); }
+}
+
+.wiggle {
+  display: inline-block;
+  animation: wiggle 1s ease-in-out infinite;
+  /* transform-origin: center bottom; /* makes the wiggle feel like a head turning */
+}
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-8deg);
+  }
+  20% {
+    transform: rotate(6deg);
+  }
+  30% {
+    transform: rotate(-4deg);
+  }
+  40% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+  60% {
+    transform: rotate(1deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.jump {
+  animation: jump 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.1s); /* use --i for index */
+}
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px); /* small jump */
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-14px); /* higher jump */
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  10% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(0deg); /* pause before spin */
+  }
+  50% {
+    transform: rotate(360deg); /* quick full spin */
+  }
+  70% {
+    transform: rotate(360deg); /* pause after spin */
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.flip {
+  display: inline-block;
+  animation: flip 1s ease-in-out infinite;
+  transform-style: preserve-3d; 
+}
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg) translateY(0);
+  }
+  20% {
+    transform: rotateY(180deg) translateY(0); /* Flip */
+  }
+  40% {
+    transform: rotateY(180deg) translateY(0); /* Pause */
+  }
+  60% {
+    transform: rotateY(180deg) translateY(-12px); /* Jump peak (earlier) */
+  }
+  100% {
+    transform: rotateY(180deg) translateY(0); /* Land */
+  }
 }.question-body {
     display: flex;
     flex-direction: column;
