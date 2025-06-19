@@ -52,10 +52,9 @@ function App() {
       {/* Html Body */}
       <div className="card" style={{ minHeight: "100vh" }}>
         <div>
-          <Title />
+          <Title state={state}/>
         </div>
         <div>
-          <div className="gameBody">
             {state == phases.JoinGame && (
               <JoinGame
                 setState={setState}
@@ -66,7 +65,6 @@ function App() {
                 setPlayerGuid={setPlayerGuid}
               />
             )}
-          </div>
           <div>
             {state == phases.PlayerList && (
               <PlayerList setState={setState} pin={pin} gameRound={gameRound} />

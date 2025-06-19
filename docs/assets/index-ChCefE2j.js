@@ -16021,7 +16021,7 @@ function JoinGame({
   reactExports.useEffect(() => {
     setPlayerName(generateAnimalName(adjectives, animalNames));
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "join-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join-card", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gameBody", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "join-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join-card", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "name-box-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-section", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-box", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "name-label", children: "And you are..." }),
@@ -16128,7 +16128,7 @@ function JoinGame({
         }
       )
     ] })
-  ] }) }) });
+  ] }) }) }) });
 }
 async function InitGame(playerName, setState, setPin, animalEmoji, socketGuid, setPlayerGuid) {
   const newGame = {
@@ -16499,11 +16499,17 @@ async function GetPlayerQuestion(playerGuid, setQuestion) {
 function isNumericString(str) {
   return !isNaN(str.trim()) && str.trim() !== "";
 }
-function Title() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "GameTitle", children: [
-    "Odd-Ball Animal",
-    /* @__PURE__ */ jsxRuntimeExports.jsx(PawPrint, { size: 30, color: "white" })
-  ] }) });
+function Title({ state }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    state != phases.JoinGame,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "GameTitle", style: {
+      marginBottom: state == phases.JoinGame ? "auto" : ""
+    }, children: [
+      "Odd-Ball Animal",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(PawPrint, { size: 30, color: "white" })
+    ] }),
+    state == phases.JoinGame && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "GameSubtitle", children: "A party game where everyone must vote out an odd-ball player" })
+  ] });
 }
 function EmojiBubbles() {
   reactExports.useEffect(() => {
@@ -16862,9 +16868,9 @@ function App() {
   }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card", style: { minHeight: "100vh" }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Title, {}) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { state }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gameBody", children: state == phases.JoinGame && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        state == phases.JoinGame && /* @__PURE__ */ jsxRuntimeExports.jsx(
           JoinGame,
           {
             setState,
@@ -16874,7 +16880,7 @@ function App() {
             setPin,
             setPlayerGuid
           }
-        ) }),
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: state == phases.PlayerList && /* @__PURE__ */ jsxRuntimeExports.jsx(PlayerList, { setState, pin, gameRound }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: state == phases.Question && /* @__PURE__ */ jsxRuntimeExports.jsx(
           Question,

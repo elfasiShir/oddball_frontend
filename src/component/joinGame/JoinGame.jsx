@@ -4,7 +4,7 @@ import { getWebSocket } from "../../utils/webSocket";
 import { phases, adjectives, animalNames, animalEmojis } from "../../const";
 import { showCustomAlert } from "../../utils/customAlert.jsx";
 import toast from "react-hot-toast";
-import { Repeat, Play } from "lucide-react";
+import { Repeat, Play, Info } from "lucide-react";
 import "./JoinGame.css";
 
 export function JoinGame({
@@ -26,105 +26,107 @@ export function JoinGame({
 
   return (
     <>
-      <div className="join-container">
-        <div className="join-card">
-          <div className="name-box-container">
-            <div className="name-section">
-              <div className="name-box">
-                <label className="name-label">And you are...</label>
-                <input
-                  type="text"
-                  value={playerName}
-                  onChange={(e) => setPlayerName(e.target.value)}
-                  className="name-input"
-                />
+      <div className="gameBody">
+        <div className="join-container">
+          <div className="join-card">
+            <div className="name-box-container">
+              <div className="name-section">
+                <div className="name-box">
+                  <label className="name-label">And you are...</label>
+                  <input
+                    type="text"
+                    value={playerName}
+                    onChange={(e) => setPlayerName(e.target.value)}
+                    className="name-input"
+                  />
+                  <div
+                    onClick={() => {
+                      setPlayerName(generateAnimalName(adjectives, animalNames));
+                    }}
+                    className="reset-icon"
+                  >
+                    <Repeat size={20} color="white" />
+                  </div>
+                </div>
                 <div
+                  className="profile-pic emojiSelector"
                   onClick={() => {
-                    setPlayerName(generateAnimalName(adjectives, animalNames));
+                    setAnimalEmoji(pickRandomEmoji);
                   }}
-                  className="reset-icon"
                 >
-                  <Repeat size={20} color="white" />
+                  {animalEmoji}
                 </div>
               </div>
-              <div
-                className="profile-pic emojiSelector"
+            </div>
+
+            <div className="actions">
+              <button
                 onClick={() => {
-                  setAnimalEmoji(pickRandomEmoji);
+                  setShowPinInput(true);
                 }}
+                className="action-btn"
+                disabled={isLoading} // Disable button while loading
               >
-                {animalEmoji}
-              </div>
-            </div>
-          </div>
-
-          <div className="actions">
-            <button
-              onClick={() => {
-                setShowPinInput(true);
-              }}
-              className="action-btn"
-              disabled={isLoading} // Disable button while loading
-            >
-              Join existing game
-            </button>
-            <button
-              onClick={async () => {
-                setIsLoading(true); // Set loading state
-                await InitGame(
-                  playerName,
-                  setState,
-                  setPin,
-                  animalEmoji,
-                  socketGuid,
-                  setPlayerGuid
-                );
-                setIsLoading(false); // Reset loading state
-              }}
-              className="action-btn"
-              disabled={isLoading} // Disable button while loading
-            >
-              Host a game
-            </button>
-          </div>
-
-          {showPinInput && (
-            <div className="pin-input-container">
-              <input
-                placeholder="Enter PIN"
-                onChange={(e) => setPinInput(e.target.value)}
-                className="pin-input"
-              />
-              <div
-                className={`play-btn ${isLoading ? "disabled" : ""}`} // Add dynamic class for disabled state
+                Join existing game
+              </button>
+              <button
                 onClick={async () => {
-                  if (!isLoading) {
-                    // Prevent click if loading
-                    setIsLoading(true); // Set loading state
-                    if (PinInput.trim() === "") {
-                      showCustomAlert("Please enter a valid PIN", {
-                        icon: "error",
-                      });
-                      setIsLoading(false); // Reset loading state
-                      return;
-                    }
-                    await JoinExistingGame(
-                      playerName,
-                      setState,
-                      PinInput,
-                      animalEmoji,
-                      setPin,
-                      socketGuid,
-                      setPlayerGuid
-                    );
-                    setIsLoading(false); // Reset loading state
-                  }
+                  setIsLoading(true); // Set loading state
+                  await InitGame(
+                    playerName,
+                    setState,
+                    setPin,
+                    animalEmoji,
+                    socketGuid,
+                    setPlayerGuid
+                  );
+                  setIsLoading(false); // Reset loading state
                 }}
+                className="action-btn"
+                disabled={isLoading} // Disable button while loading
               >
-                <Play size={20} color="white" />
-              </div>
+                Host a game
+              </button>
             </div>
-          )}
+
+            {showPinInput && (
+              <div className="pin-input-container">
+                <input
+                  placeholder="Enter PIN"
+                  onChange={(e) => setPinInput(e.target.value)}
+                  className="pin-input"
+                />
+                <div
+                  className={`play-btn ${isLoading ? "disabled" : ""}`} // Add dynamic class for disabled state
+                  onClick={async () => {
+                    if (!isLoading) {
+                      // Prevent click if loading
+                      setIsLoading(true); // Set loading state
+                      if (PinInput.trim() === "") {
+                        showCustomAlert("Please enter a valid PIN", {
+                          icon: "error",
+                        });
+                        setIsLoading(false); // Reset loading state
+                        return;
+                      }
+                      await JoinExistingGame(
+                        playerName,
+                        setState,
+                        PinInput,
+                        animalEmoji,
+                        setPin,
+                        socketGuid,
+                        setPlayerGuid
+                      );
+                      setIsLoading(false); // Reset loading state
+                    }
+                  }}
+                >
+                  <Play size={20} color="white" />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
