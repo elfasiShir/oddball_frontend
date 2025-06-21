@@ -15929,8 +15929,19 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$6 = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$6);
+const __iconNode$7 = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$7);
+/**
+ * @license lucide-react v0.507.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$6 = [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+];
+const Copy = createLucideIcon("copy", __iconNode$6);
 /**
  * @license lucide-react v0.507.0 - ISC
  *
@@ -15938,10 +15949,11 @@ const Check = createLucideIcon("check", __iconNode$6);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$5 = [
-  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
-  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 16v-4", key: "1dtifu" }],
+  ["path", { d: "M12 8h.01", key: "e9boi3" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$5);
+const Info = createLucideIcon("info", __iconNode$5);
 /**
  * @license lucide-react v0.507.0 - ISC
  *
@@ -16021,114 +16033,129 @@ function JoinGame({
   reactExports.useEffect(() => {
     setPlayerName(generateAnimalName(adjectives, animalNames));
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gameBody", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "join-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join-card", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "name-box-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-section", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-box", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "name-label", children: "And you are..." }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gameBody", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "join-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join-card", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "name-box-container", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-section", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "name-box", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "name-label", children: "And you are..." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              type: "text",
+              value: playerName,
+              onChange: (e2) => setPlayerName(e2.target.value),
+              className: "name-input"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              onClick: () => {
+                setPlayerName(generateAnimalName(adjectives, animalNames));
+              },
+              className: "reset-icon",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Repeat, { size: 20, color: "white" })
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "profile-pic emojiSelector",
+            onClick: () => {
+              setAnimalEmoji(pickRandomEmoji);
+            },
+            children: animalEmoji
+          }
+        )
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "actions", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: () => {
+              setShowPinInput(true);
+            },
+            className: "action-btn",
+            disabled: isLoading2,
+            children: "Join existing game"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: async () => {
+              setIsLoading(true);
+              await InitGame(
+                playerName,
+                setState,
+                setPin,
+                animalEmoji,
+                socketGuid,
+                setPlayerGuid
+              );
+              setIsLoading(false);
+            },
+            className: "action-btn",
+            disabled: isLoading2,
+            children: "Host a game"
+          }
+        )
+      ] }),
+      showPinInput && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pin-input-container", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "input",
           {
-            type: "text",
-            value: playerName,
-            onChange: (e2) => setPlayerName(e2.target.value),
-            className: "name-input"
+            placeholder: "Enter PIN",
+            onChange: (e2) => setPinInput(e2.target.value),
+            className: "pin-input"
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            onClick: () => {
-              setPlayerName(generateAnimalName(adjectives, animalNames));
+            className: `play-btn ${isLoading2 ? "disabled" : ""}`,
+            onClick: async () => {
+              if (!isLoading2) {
+                setIsLoading(true);
+                if (PinInput.trim() === "") {
+                  showCustomAlert("Please enter a valid PIN", {
+                    icon: "error"
+                  });
+                  setIsLoading(false);
+                  return;
+                }
+                await JoinExistingGame(
+                  playerName,
+                  setState,
+                  PinInput,
+                  animalEmoji,
+                  setPin,
+                  socketGuid,
+                  setPlayerGuid
+                );
+                setIsLoading(false);
+              }
             },
-            className: "reset-icon",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(Repeat, { size: 20, color: "white" })
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(Play, { size: 20, color: "white" })
           }
         )
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gameBody", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "gamemode-information-container", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "gamemode-title", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Info, {}),
+        " Classic mode"
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
-        {
-          className: "profile-pic emojiSelector",
-          onClick: () => {
-            setAnimalEmoji(pickRandomEmoji);
-          },
-          children: animalEmoji
-        }
-      )
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "actions", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          onClick: () => {
-            setShowPinInput(true);
-          },
-          className: "action-btn",
-          disabled: isLoading2,
-          children: "Join existing game"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          onClick: async () => {
-            setIsLoading(true);
-            await InitGame(
-              playerName,
-              setState,
-              setPin,
-              animalEmoji,
-              socketGuid,
-              setPlayerGuid
-            );
-            setIsLoading(false);
-          },
-          className: "action-btn",
-          disabled: isLoading2,
-          children: "Host a game"
-        }
-      )
-    ] }),
-    showPinInput && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pin-input-container", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          placeholder: "Enter PIN",
-          onChange: (e2) => setPinInput(e2.target.value),
-          className: "pin-input"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
-        {
-          className: `play-btn ${isLoading2 ? "disabled" : ""}`,
-          onClick: async () => {
-            if (!isLoading2) {
-              setIsLoading(true);
-              if (PinInput.trim() === "") {
-                showCustomAlert("Please enter a valid PIN", {
-                  icon: "error"
-                });
-                setIsLoading(false);
-                return;
-              }
-              await JoinExistingGame(
-                playerName,
-                setState,
-                PinInput,
-                animalEmoji,
-                setPin,
-                socketGuid,
-                setPlayerGuid
-              );
-              setIsLoading(false);
-            }
-          },
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Play, { size: 20, color: "white" })
-        }
-      )
-    ] })
-  ] }) }) }) });
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "gamemode-information", children: [
+        "All party members receive a question, while one player will receive a different question.",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "After answering, all party members will try to vote out the player who is the odd one out.",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "Yet there is a twist, one player can cheat."
+      ] })
+    ] }) })
+  ] });
 }
 async function InitGame(playerName, setState, setPin, animalEmoji, socketGuid, setPlayerGuid) {
   const newGame = {

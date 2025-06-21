@@ -129,6 +129,19 @@ export function JoinGame({
           </div>
         </div>
       </div>
+      <div className="gameBody">
+        <div className="gamemode-information-container">
+          <div className="gamemode-title">
+          <Info /> Classic mode</div>
+          <div className="gamemode-information">
+            All party members receive a question, while one player will receive a different question.
+            <br />
+            After answering, all party members will try to vote out the player who is the odd one out.
+            <br />
+            Yet there is a twist, one player can cheat.
+          </div>
+        </div>
+      </div>
     </>
   );
 }

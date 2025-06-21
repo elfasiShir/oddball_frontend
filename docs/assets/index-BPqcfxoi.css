@@ -222,7 +222,41 @@ align-items: center;
 .pin-input-container {
   position: relative; /* Make the container a positioning context */
   width: 100%;
-}.player {
+}
+
+.gamemode-information-container {
+  border-radius: 1rem;
+  padding: 1.2rem 1.6rem;
+  margin-top: 1rem;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  color: #ffffffcc;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.gamemode-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #ffffffee;
+  margin-bottom: 0.8rem;
+}
+
+.gamemode-title svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.gamemode-information {
+  font-weight: 500;
+  color: #fffffff2;
+}
+.player {
 
     display: flex;
     align-items: center;
