@@ -1,5 +1,5 @@
 /* Prod:
-export const API_BASE_URL = "oddball.roytmax.com";
+export const API_BASE_URL = "oddball-be.roytmax.com";
 export const PROTOCOL = "https";
 export const WS_PROTOCOL = "wss";
  */
@@ -10,7 +10,7 @@ export const PROTOCOL = "http";
 export const WS_PROTOCOL = "ws";
 */
 
-export const API_BASE_URL = "oddball.roytmax.com";
+export const API_BASE_URL = "oddball-be.roytmax.com";
 export const PROTOCOL = "https";
 export const WS_PROTOCOL = "wss";
 
